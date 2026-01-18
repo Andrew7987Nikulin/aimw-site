@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AiMW — Core AI Middleware</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <header class="nav">
+    <div class="brand">
+      <div class="logo">A</div>
+      <div>
+        <div class="brand-name">AiMW</div>
+        <div class="brand-sub">Core AI Middleware</div>
+      </div>
+    </div>
+    <nav class="links">
+      <a href="#pipeline">Pipeline</a>
+      <a href="#memory">Memory</a>
+      <a href="#execution">Execution</a>
+      <a href="#observability">Observability</a>
+    </nav>
+    <button id="themeBtn" class="btn ghost" type="button">🌗</button>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-left">
+        <div class="chip">Infrastructure Layer • Deterministic Pipeline • RAG-ready</div>
+        <h1>Собери LLM‑систему, где <span class="grad">поведение предсказуемо</span>.</h1>
+        <p class="lead">
+          AiMW — middleware между клиентами и AI‑провайдерами: маршрутизация, память, retrieval, агенты и метрики — в одном backend‑пайплайне.
+        </p>
+        <div class="cta">
+          <a class="btn" href="#demo">Попробовать демо</a>
+          <a class="btn ghost" href="#architecture">Посмотреть архитектуру</a>
+        </div>
+        <div class="kpis">
+          <div class="kpi">
+            <div class="kpi-num">6</div>
+            <div class="kpi-label">шагов lifecycle</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-num">3</div>
+            <div class="kpi-label">типа памяти</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-num">∞</div>
+            <div class="kpi-label">адаптеров моделей</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="card glow">
+          <div class="card-head">
+            <div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div>
+            <div class="card-title">request.trace</div>
+          </div>
+          <pre class="code" id="tracePreview">{
+  "parse_normalize": "...",
+  "classify_intent": "architecture",
+  "decide_retrieval_memory": { "use_retrieval": true },
+  "assemble_context": { "sources": 2 },
+  "execute": { "adapter": "demo" },
+  "postprocess": "response"
+}</pre>
+          <div class="card-foot">
+            <span class="pill">soft minimal</span>
+            <span class="pill neon">cyber accent</span>
+            <span class="pill">FastAPI</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="architecture" class="grid3">
+      <article class="panel">
+        <h3>Детерминированный lifecycle</h3>
+        <p>Централизованная логика классификации, маршрутизации и сборки контекста. Единое поведение вне зависимости от модели и клиента.</p>
+        <ul>
+          <li>parse & normalize</li>
+          <li>intent classification</li>
+          <li>retrieval/memory decision</li>
+        </ul>
+      </article>
+      <article class="panel">
+        <h3>Память и retrieval</h3>
+        <p>Session / canonical / retrieval память. RAG через embeddings и векторный поиск (pgvector) или лёгкий fallback локально.</p>
+        <ul>
+          <li>PostgreSQL + pgvector</li>
+          <li>SQLite fallback</li>
+          <li>score cutoffs</li>
+        </ul>
+      </article>
+      <article class="panel">
+        <h3>Наблюдаемость</h3>
+        <p>Метрики задержек, hit/miss retrieval, события пайплайна — чтобы контролировать стоимость и качество.</p>
+        <ul>
+          <li>Prometheus export</li>
+          <li>pipeline events</li>
+          <li>latency budget</li>
+        </ul>
+      </article>
+    </section>
+
+    <section id="demo" class="demo">
+      <div class="demo-head">
+        <h2>Демо: прогон запроса через пайплайн</h2>
+        <p>Запрос отправится на <code>/api/chat</code>, а ты увидишь trace шагов.</p>
+      </div>
+
+      <div class="demo-grid">
+        <div class="panel">
+          <label class="label">Твой запрос</label>
+          <textarea id="chatInput" class="textarea" rows="5">Объясни, когда AiMW включает retrieval и зачем нужен pgvector.</textarea>
+          <div class="row">
+            <input id="namespace" class="input" value="default" />
+            <button id="sendBtn" class="btn" type="button">Отправить</button>
+          </div>
+          <div class="row hint">
+            <button id="seedBtn" class="btn ghost" type="button">Заполнить память примером</button>
+            <span id="status" class="muted"></span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="split">
+            <div>
+              <div class="label">Ответ</div>
+              <div id="chatOut" class="out"></div>
+            </div>
+            <div>
+              <div class="label">Trace</div>
+              <pre id="traceOut" class="out code"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer">
+      <div class="footer-line"></div>
+      <div class="muted">AiMW • minimal + soft + cyberpunk hint • v0.1 demo</div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
