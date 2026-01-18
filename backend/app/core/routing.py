@@ -14,7 +14,6 @@ def classify_intent(text: str) -> str:
     return "chat"
 
 def decide_retrieval(text: str, intent: str) -> dict:
-    # Демо-эвристика: retrieval включаем для "architecture" и для запросов с "RAG"/"pgvector"/"Prometheus"
     t = text.lower()
     keywords = ["rag", "pgvector", "prometheus", "observability", "postgres", "vector", "embedding", "retrieval"]
     use = intent in {"architecture", "explain"} and any(k in t for k in keywords)

@@ -24,7 +24,6 @@ def _tf(tokens: list[str]) -> dict[str, float]:
     return d
 
 def _cos(a: dict[str, float], b: dict[str, float]) -> float:
-    # sparse cosine
     dot = 0.0
     for k, v in a.items():
         dot += v * b.get(k, 0.0)

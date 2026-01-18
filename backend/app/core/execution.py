@@ -1,9 +1,7 @@
 from __future__ import annotations
 
 async def execute(text: str, intent: str, context: dict) -> dict:
-    # Заглушка: вместо реального LLM адаптера возвращаем "разумный" ответ,
-    # но место подключения провайдера — здесь.
-    # Пример: adapter.generate(messages=[...], model=..., temperature=...)
+    # TODO: adapter.generate(messages=[...], model=..., temperature=...)
     sources = context.get("sources", [])
     hint = ""
     if sources:

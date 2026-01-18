@@ -12,7 +12,6 @@ from .db.session import init_db
 
 app = FastAPI(title="AiMW", version="0.1.0")
 
-# CORS (оставлено гибким, чтобы фронт можно было выносить отдельно)
 allowed = [settings.public_origin] if settings.public_origin else ["*"]
 app.add_middleware(
     CORSMiddleware,

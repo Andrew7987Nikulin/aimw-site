@@ -15,4 +15,3 @@ class Document(Base):
     namespace: Mapped[str] = mapped_column(String(64), index=True)
     title: Mapped[str] = mapped_column(String(200))
     content: Mapped[str] = mapped_column(Text)
-    # embedding хранится отдельно/опционально в pgvector. Для SQLite-демо не используем.
